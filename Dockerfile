@@ -291,7 +291,7 @@ RUN apt-get update && \
 RUN cd /tmp && \
     wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz && \
     tar xzf ioncube_loaders_lin_x86-64.tar.gz && \
-    PHP_EXT_DIR=$(php -i | grep extension_dir | awk '{print $5}' | tr -d "'") && \
+    PHP_EXT_DIR=$(php -r "echo ini_get('extension_dir');") && \
     cp ioncube/ioncube_loader_lin_${PHP_VERSION}.so ${PHP_EXT_DIR}/ && \
     echo "zend_extension=ioncube_loader_lin_${PHP_VERSION}.so" > /etc/php/${PHP_VERSION}/apache2/conf.d/00-ioncube.ini && \
     echo "zend_extension=ioncube_loader_lin_${PHP_VERSION}.so" > /etc/php/${PHP_VERSION}/cli/conf.d/00-ioncube.ini && \
